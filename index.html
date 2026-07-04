@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Graham — Graphic Design Portfolio</title>
+    
+    <!-- Import Google Fonts: Inter (Variable font matching Helvetica Neue style) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        :root {
+            --bg-light: #f3f3f3;
+            --bg-white: #ffffff;
+            --bg-dark: #000000;
+            --text-dark: #000000;
+            --text-muted: #666666;
+            --text-light: #ffffff;
+            --universal-margin: clamp(20px, 5vw, 80px);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        /* TYPOGRAPHY HIERARCHY AS SPECIFIED */
+        h1, .h1-regular {
+            font-weight: 300;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--text-dark);
+        }
+
+        h2, .h2-medium {
+            font-weight: 500;
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        h3, .h3-caps-gray {
+            font-weight: 400;
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+        }
+
+        p, .body-text {
+            font-weight: 400;
+            font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        a:hover {
+            opacity: 0.6;
+        }
+
+        /* LAYOUT CONTAINERS & MARGINS */
+        .section-padding {
+            padding: var(--universal-margin);
+        }
+
+        /* HERO HEADER BLOCK (Mockup 1 style) */
+        header.hero-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px var(--universal-margin);
+            background-color: rgba(243, 243, 243, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background-color var(--transition-speed);
+        }
+
+        .logo {
+            font-weight: 600; /* Logo weight */
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            letter-spacing: -0.01em;
+            z-index: 1001;
+        }
+
+        /* Desktop Nav Link Array */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            font-weight: 400;
+        }
+
+        .client-portal {
+            text-align: right;
+            line-height: 1.1;
+        }
+
+        .client-portal span {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Mobile Hamburger Icon */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-dark);
+            transition: all var(--transition-speed) ease;
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: var(--universal-margin);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        /* UNIVERSAL FULL-BLEED HERO HEADING IMAGE */
+        .page-hero-bleed {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            min-height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-bottom: 1px solid #eeeeee;
+            background-color: var(--bg-light);
+        }
+
+        .hero-image-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-image-frame::before,
+        .hero-image-frame::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 1px;
+            background-color: rgba(0,0,0,0.08);
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            z-index: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .hero-image-frame::before { transform: translate(-50%, -50%) rotate(12deg); }
+        .hero-image-frame::after { transform: translate(-50%, -50%) rotate(-12deg); }
+
+        .hero-image-frame.image-loaded::before,
+        .hero-image-frame.image-loaded::after {
+            opacity: 0;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 80%;
+            padding: 0 var(--universal-margin);
+            pointer-events: none;
+        }
+
+        .page-hero-title {
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .page-hero-subtitle {
+            font-weight: 400;
+            font-size: clamp(1.3rem, 3vw, 2.2rem);
+            color: var(--text-dark);
+            opacity: 0.9;
+        }
+
+        /* SMART IMAGE FRAME ENGINES (WIREFRAME REPLACEMENT READY) */
+        .picture-frame {
+            position: relative;
+            overflow: hidden;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            width: 100%;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .picture-frame::before,
+        .picture-frame::after {
+            content: '';
+            position: absolute;
+            width: 141.4%;
+            height: 1px;
+            background-color: #e0e0e0;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            z-index: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .picture-frame::before { transform: translate(-50%, -50%) rotate(45deg); }
+        .picture-frame::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+        .picture-frame.image-loaded::before,
+        .picture-frame.image-loaded::after {
+            opacity: 0;
+        }
+
+        .frame-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .picture-frame.image-loaded .frame-img,
+        .hero-image-frame.image-loaded .frame-img {
+            opacity: 1;
+        }
+
+        /* REFINED SLIDESHOW SECTION: White background split structure */
+        .slideshow-section {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            padding: var(--universal-margin);
+            overflow: hidden;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .slideshow-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        .slideshow-title-caps {
+            color: var(--text-muted);
+        }
+
+        /* Slider split container */
+        .slides-container {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+            min-height: 450px;
+        }
+
+        .slide-layout {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: clamp(30px, 6vw, 100px);
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateX(15px);
+        }
+
+        .slide-layout.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .slide-media {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-picture-frame {
+            aspect-ratio: 16 / 10;
+            max-height: 400px;
+        }
+
+        /* Typography side */
+        .slide-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .slide-category {
+            margin-bottom: -10px;
+        }
+
+        .slide-main-title {
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+        }
+
+        .slide-body-filler {
+            color: var(--text-muted);
+            max-width: 90%;
+            text-align: justify;
+        }
+
+        /* Slide Link & Indicator Array */
+        .slide-action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .slide-action-link:hover .arrow-icon-small {
+            transform: translateX(6px);
+        }
+
+        .arrow-icon-small {
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .slideshow-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-top: 20px;
+        }
+
+        .slideshow-indicator {
+            display: flex;
+            gap: 12px;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        .indicator-dot.active {
+            background-color: var(--text-dark);
+        }
+
+        /* DESIGN PROCESS SECTION (Mockup 4) */
+        .process-section {
+            background-color: var(--bg-white);
+            padding: calc(var(--universal-margin) * 1.5) var(--universal-margin);
+            border-top: 1px solid #eeeeee;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .process-header h3 {
+            margin-bottom: 12px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(20px, 3vw, 40px);
+            width: 100%;
+        }
+
+        .process-card {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .process-picture-frame {
+            aspect-ratio: 1 / 1;
+        }
+
+        .process-card p {
+            font-size: clamp(0.85rem, 1.1vw, 1rem);
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* READ MORE / PORTFOLIO ARRAYS (Mockup 5) */
+        .read-more-section {
+            background-color: var(--bg-white);
+            padding: var(--universal-margin);
+            border-top: 1px solid #eeeeee;
+        }
+
+        .read-more-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .horizontal-scroller {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .scroller-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .scroller-picture-frame {
+            aspect-ratio: 16 / 9;
+        }
+
+        .scroller-subtitle {
+            font-weight: 500;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-dark);
+        }
+
+        /* PERSISTENT FOOTER ARCHITECTURE (Mockup 5) */
+        footer.minimal-footer {
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px var(--universal-margin);
+            border-top: 1px solid #e5e5e5;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            font-size: 1rem;
+        }
+
+        /* CLIENT PORTAL SIGN IN INTERACTION */
+        .portal-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .portal-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .portal-modal {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            transition: transform var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portal-modal-overlay.active .portal-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--text-dark);
+        }
+
+        .btn-signin {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-signin:hover {
+            opacity: 0.9;
+        }
+
+        /* RESPONSIVE BREAKPOINTS (Mobile & Tablet Layouts) */
+        @media (max-width: 1024px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .horizontal-scroller {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .slide-layout {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Split layout sliders stack cleanly on Mobile */
+            .slide-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                height: auto;
+                position: relative;
+                opacity: 0;
+                display: none;
+            }
+
+            .slide-layout.active {
+                display: flex;
+                flex-direction: column;
+                opacity: 1;
+            }
+
+            .slide-picture-frame {
+                aspect-ratio: 16 / 9;
+                max-height: 250px;
+            }
+
+            .slides-container {
+                min-height: auto;
+                margin: 20px 0;
+            }
+
+            .process-grid, .horizontal-scroller {
+                grid-template-columns: 1fr;
+            }
+
+            footer.minimal-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    </style>
+</head>
+<body>
+
+    <!-- HERO HEADER BLOCK -->
+    <header class="hero-nav">
+        <div class="logo">
+            <a href="index.html">Alex Graham</a>
+        </div>
+        
+        <!-- Desktop Nav -->
+        <nav class="nav-links">
+            <a href="portfolio.html">Portfolio</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog/FAQ</a>
+            <a href="about.html">About</a>
+            <a href="#" class="client-portal" id="openPortalBtn">
+                Client Portal
+                <span>Sign In</span>
+            </a>
+        </nav>
+
+        <!-- Hamburger Icon -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="portfolio.html" class="mobile-link">Portfolio</a>
+        <a href="services.html" class="mobile-link">Services</a>
+        <a href="blog.html" class="mobile-link">Blog/FAQ</a>
+        <a href="about.html" class="mobile-link">About</a>
+        <a href="#" class="mobile-link" id="mobilePortalBtn">Client Portal Sign In</a>
+    </div>
+
+    <!-- UNIVERSAL FULL-BLEED HERO HEADING IMAGE (Excluding Articles rule met) -->
+    <section class="page-hero-bleed">
+        <div class="hero-image-frame">
+            <!-- INPUT FILE NAME TO REPLACE MAIN HERO BANNER IMAGE HERE -->
+            <img src="" alt="Main Home Banner" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+        </div>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Alex Graham</h1>
+            <p class="page-hero-subtitle">Graphic Design</p>
+        </div>
+    </section>
+
+    <!-- SLIDESHOW TRANSITIONS: White background split structure -->
+    <section class="slideshow-section" id="portfolio">
+        <div class="slideshow-header">
+            <h3 class="slideshow-title-caps">Selected Projects</h3>
+            <span id="slideCounter" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">01 / 03</span>
+        </div>
+
+        <!-- Split Layout Slides Container -->
+        <div class="slides-container" id="slidesContainer">
+            
+            <!-- Slide 1 -->
+            <div class="slide-layout active" id="slide-0">
+                <div class="slide-media">
+                    <div class="picture-frame slide-picture-frame">
+                        <!-- INPUT FILE NAME TO REPLACE SLIDE 1 COVER IMAGE HERE -->
+                        <img src="" alt="Social Media Branding" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                    </div>
+                </div>
+                <div class="slide-info">
+                    <h3 class="h3-caps-gray slide-category">Social Identity</h3>
+                    <h2 class="h2-medium slide-main-title">Visual Systems For Social Media</h2>
+                    <p class="body-text slide-body-filler">
+                        An extensive exploration of visual identities, dynamic templates, and brand assets optimized for modern social touchpoints, utilizing clean editorial design patterns and high-impact variable typography rules.
+                    </p>
+                    <a href="article-breadup.html" class="slide-action-link">
+                        Read more about this project <span class="arrow-icon-small">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide-layout" id="slide-1">
+                <div class="slide-media">
+                    <div class="picture-frame slide-picture-frame">
+                        <!-- INPUT FILE NAME TO REPLACE SLIDE 2 COVER IMAGE HERE -->
+                        <img src="" alt="Minimal Design Strategy" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                    </div>
+                </div>
+                <div class="slide-info">
+                    <h3 class="h3-caps-gray slide-category">System Architecture</h3>
+                    <h2 class="h2-medium slide-main-title">Minimal Design System Strategy</h2>
+                    <p class="body-text slide-body-filler">
+                        Architecting a robust, scalable component library and graphic style guidelines. Built upon strict alignment rules, variable grids, and system-level font hierarchies for high-growth digital interfaces.
+                    </p>
+                    <a href="article-breadup.html" class="slide-action-link">
+                        View design strategy specs <span class="arrow-icon-small">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide-layout" id="slide-2">
+                <div class="slide-media">
+                    <div class="picture-frame slide-picture-frame">
+                        <!-- INPUT FILE NAME TO REPLACE SLIDE 3 COVER IMAGE HERE -->
+                        <img src="" alt="Interactive Brand Identity" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                    </div>
+                </div>
+                <div class="slide-info">
+                    <h3 class="h3-caps-gray slide-category">Physical & Digital</h3>
+                    <h2 class="h2-medium slide-main-title">Interactive Brand Identity Package</h2>
+                    <p class="body-text slide-body-filler">
+                        Synthesizing editorial structures into a hybrid sensory environment. Blending high-touch physical materials with fluid, high-resolution browser mockups and visual communications.
+                    </p>
+                    <a href="article-breadup.html" class="slide-action-link">
+                        Explore mockups & guidelines <span class="arrow-icon-small">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="slideshow-footer">
+            <div class="slideshow-indicator">
+                <div class="indicator-dot active" data-index="0"></div>
+                <div class="indicator-dot" data-index="1"></div>
+                <div class="indicator-dot" data-index="2"></div>
+            </div>
+            <!-- Dynamic Carousel Cycler -->
+            <button id="nextSlideBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Next</span> &rarr;
+            </button>
+        </div>
+    </section>
+
+    <!-- DESIGN PROCESS SECTION (Mockup 4) -->
+    <section class="process-section" id="services">
+        <div class="process-header">
+            <h3>Conceptual Project</h3>
+            <h2>Design Process</h2>
+        </div>
+
+        <div class="process-grid">
+            <!-- Column 1 -->
+            <div class="process-card">
+                <div class="picture-frame process-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 1 IMAGE HERE -->
+                    <img src="" alt="Discovery Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
+            </div>
+            <!-- Column 2 -->
+            <div class="process-card">
+                <div class="picture-frame process-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 2 IMAGE HERE -->
+                    <img src="" alt="Prototyping Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
+            </div>
+            <!-- Column 3 -->
+            <div class="process-card">
+                <div class="picture-frame process-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 3 IMAGE HERE -->
+                    <img src="" alt="Design Strategy Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
+            </div>
+            <!-- Column 4 -->
+            <div class="process-card">
+                <div class="picture-frame process-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 4 IMAGE HERE -->
+                    <img src="" alt="Delivery Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- READ MORE / GALLERY GRID (Mockup 5) -->
+    <section class="read-more-section" id="blog">
+        <h2 class="read-more-title">Read More:</h2>
+        
+        <div class="horizontal-scroller">
+            <!-- Card 1 -->
+            <div class="scroller-card">
+                <div class="picture-frame scroller-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE SCROLLER CARD 1 COVER IMAGE HERE -->
+                    <img src="" alt="Artisanal Branding" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <a href="article-breadup.html" class="scroller-subtitle">Subtitle Summ idk.</a>
+            </div>
+            <!-- Card 2 -->
+            <div class="scroller-card">
+                <div class="picture-frame scroller-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE SCROLLER CARD 2 COVER IMAGE HERE -->
+                    <img src="" alt="System Interface Details" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <a href="article-breadup.html" class="scroller-subtitle">Subtitle Summ idk.</a>
+            </div>
+            <!-- Card 3 -->
+            <div class="scroller-card">
+                <div class="picture-frame scroller-picture-frame">
+                    <!-- INPUT FILE NAME TO REPLACE SCROLLER CARD 3 COVER IMAGE HERE -->
+                    <img src="" alt="Asymmetric Structural Design" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+                <a href="article-breadup.html" class="scroller-subtitle">Subtitle Summ idk.</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERSISTENT MINIMAL FOOTER -->
+    <footer class="minimal-footer" id="about">
+        <div class="footer-logo">Alex Graham</div>
+        <nav class="footer-nav">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog/FAQ</a>
+            <a href="about.html">About</a>
+            <a href="#" class="client-portal" id="footerPortalBtn">
+                Client Portal
+                <span>Sign In</span>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- CLIENT PORTAL INTERACTIVE MODAL -->
+    <div class="portal-modal-overlay" id="portalModal">
+        <div class="portal-modal">
+            <div class="modal-header">
+                <h2 style="font-weight: 500; font-size: 1.5rem;">Client Portal</h2>
+                <button class="close-modal" id="closePortalBtn">&times;</button>
+            </div>
+            <form onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="name@company.com">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-signin">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // MOBILE HAMBURGER TRANSITION CONTROL
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            hamburgerBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(mobileMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // CLIENT PORTAL MODAL INTERACTION
+        const portalModal = document.getElementById('portalModal');
+        const openPortalBtn = document.getElementById('openPortalBtn');
+        const mobilePortalBtn = document.getElementById('mobilePortalBtn');
+        const footerPortalBtn = document.getElementById('footerPortalBtn');
+        const closePortalBtn = document.getElementById('closePortalBtn');
+
+        function openModal(e) {
+            e.preventDefault();
+            portalModal.classList.add('active');
+        }
+
+        function closeModal() {
+            portalModal.classList.remove('active');
+        }
+
+        openPortalBtn.addEventListener('click', openModal);
+        mobilePortalBtn.addEventListener('click', openModal);
+        footerPortalBtn.addEventListener('click', openModal);
+        closePortalBtn.addEventListener('click', closeModal);
+
+        portalModal.addEventListener('click', (e) => {
+            if (e.target === portalModal) {
+                closeModal();
+            }
+        });
+
+        // REFINED SPLIT SLIDESHOW CONTROLLER (White/Black, Frame left, Text right)
+        let currentSlideIndex = 0;
+        const totalSlides = 3;
+        
+        const slides = document.querySelectorAll('.slide-layout');
+        const indicatorDots = document.querySelectorAll('.indicator-dot');
+        const slideCounter = document.getElementById('slideCounter');
+        const nextSlideBtn = document.getElementById('nextSlideBtn');
+
+        function showSlide(index) {
+            if (index >= totalSlides) index = 0;
+            if (index < 0) index = totalSlides - 1;
+            
+            currentSlideIndex = index;
+
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === currentSlideIndex);
+            });
+
+            indicatorDots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentSlideIndex);
+            });
+
+            slideCounter.textContent = `0${currentSlideIndex + 1} / 03`;
+        }
+
+        nextSlideBtn.addEventListener('click', () => {
+            showSlide(currentSlideIndex + 1);
+        });
+
+        indicatorDots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const targetIndex = parseInt(e.target.getAttribute('data-index'));
+                showSlide(targetIndex);
+            });
+        });
+    </script>
+</body>
+</html>
