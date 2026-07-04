@@ -433,6 +433,46 @@
             background-color: var(--text-dark);
         }
 
+        /* SERVICES CTA SECTION */
+        .services-cta-section {
+            background-color: var(--bg-white);
+            padding: calc(var(--universal-margin) * 1.1) var(--universal-margin);
+            border-top: 1px solid #eeeeee;
+        }
+
+        .services-cta-card {
+            background-color: var(--bg-light);
+            border: 1px solid #e5e5e5;
+            padding: clamp(28px, 4vw, 40px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .services-cta-copy {
+            max-width: 620px;
+        }
+
+        .services-cta-copy h2 {
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            margin-bottom: 8px;
+        }
+
+        .services-cta-copy p {
+            color: var(--text-muted);
+        }
+
+        .services-cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            padding: 12px 18px;
+            border: 1px solid var(--text-dark);
+            white-space: nowrap;
+        }
+
         /* DESIGN PROCESS SECTION (Mockup 4) */
         .process-section {
             background-color: var(--bg-white);
@@ -678,6 +718,11 @@
                 grid-template-columns: 1fr;
             }
 
+            .services-cta-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             footer.minimal-footer {
                 flex-direction: column;
                 align-items: flex-start;
@@ -711,7 +756,7 @@
             <a href="services.html">Services</a>
             <a href="blog.html">Blog/FAQ</a>
             <a href="about.html">About</a>
-            <a href="#" class="client-portal" id="openPortalBtn">
+            <a href="https://alexander-graham.zite.so" class="client-portal" id="openPortalBtn">
                 Client Portal
                 <span>Sign In</span>
             </a>
@@ -731,7 +776,7 @@
         <a href="services.html" class="mobile-link">Services</a>
         <a href="blog.html" class="mobile-link">Blog/FAQ</a>
         <a href="about.html" class="mobile-link">About</a>
-        <a href="#" class="mobile-link" id="mobilePortalBtn">Client Portal Sign In</a>
+        <a href="https://alexander-graham.zite.so" class="mobile-link" id="mobilePortalBtn">Client Portal Sign In</a>
     </div>
 
     <!-- UNIVERSAL FULL-BLEED HERO HEADING IMAGE (Excluding Articles rule met) -->
@@ -824,10 +869,16 @@
                 <div class="indicator-dot" data-index="1"></div>
                 <div class="indicator-dot" data-index="2"></div>
             </div>
-            <!-- Dynamic Carousel Cycler -->
-            <button id="nextSlideBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Next</span> &rarr;
-            </button>
+        </div>
+    </section>
+
+    <section class="services-cta-section">
+        <div class="services-cta-card">
+            <div class="services-cta-copy">
+                <h2 class="h2-medium">View my services</h2>
+                <p class="body-text">A concise overview of the branding, editorial, and digital systems I create for thoughtful teams and modern businesses.</p>
+            </div>
+            <a href="services.html" class="services-cta-link">Explore services <span>&rarr;</span></a>
         </div>
     </section>
 
@@ -874,38 +925,6 @@
         </div>
     </section>
 
-    <!-- READ MORE / GALLERY GRID (Mockup 5) -->
-    <section class="read-more-section" id="blog">
-        <h2 class="read-more-title">Read More:</h2>
-        
-        <div class="horizontal-scroller">
-            <!-- Card 1 -->
-            <div class="scroller-card">
-                <div class="picture-frame scroller-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE SCROLLER CARD 1 COVER IMAGE HERE -->
-                    <img src="" alt="Artisanal Branding" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <a href="article-breadup.html" class="scroller-subtitle">Subtitle Summ idk.</a>
-            </div>
-            <!-- Card 2 -->
-            <div class="scroller-card">
-                <div class="picture-frame scroller-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE SCROLLER CARD 2 COVER IMAGE HERE -->
-                    <img src="" alt="System Interface Details" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <a href="article-breadup.html" class="scroller-subtitle">Subtitle Summ idk.</a>
-            </div>
-            <!-- Card 3 -->
-            <div class="scroller-card">
-                <div class="picture-frame scroller-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE SCROLLER CARD 3 COVER IMAGE HERE -->
-                    <img src="" alt="Asymmetric Structural Design" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <a href="article-breadup.html" class="scroller-subtitle">Subtitle Summ idk.</a>
-            </div>
-        </div>
-    </section>
-
     <!-- PERSISTENT MINIMAL FOOTER -->
     <footer class="minimal-footer" id="about">
         <div class="footer-logo">Alex Graham</div>
@@ -913,7 +932,7 @@
             <a href="services.html">Services</a>
             <a href="blog.html">Blog/FAQ</a>
             <a href="about.html">About</a>
-            <a href="#" class="client-portal" id="footerPortalBtn">
+            <a href="https://alexander-graham.zite.so" class="client-portal" id="footerPortalBtn">
                 Client Portal
                 <span>Sign In</span>
             </a>
@@ -972,7 +991,7 @@
 
         function openModal(e) {
             e.preventDefault();
-            portalModal.classList.add('active');
+            window.location.href = 'https://alexander-graham.zite.so';
         }
 
         function closeModal() {
@@ -997,7 +1016,6 @@
         const slides = document.querySelectorAll('.slide-layout');
         const indicatorDots = document.querySelectorAll('.indicator-dot');
         const slideCounter = document.getElementById('slideCounter');
-        const nextSlideBtn = document.getElementById('nextSlideBtn');
 
         function showSlide(index) {
             if (index >= totalSlides) index = 0;
@@ -1016,16 +1034,16 @@
             slideCounter.textContent = `0${currentSlideIndex + 1} / 03`;
         }
 
-        nextSlideBtn.addEventListener('click', () => {
-            showSlide(currentSlideIndex + 1);
-        });
-
         indicatorDots.forEach(dot => {
             dot.addEventListener('click', (e) => {
                 const targetIndex = parseInt(e.target.getAttribute('data-index'));
                 showSlide(targetIndex);
             });
         });
+
+        setInterval(() => {
+            showSlide(currentSlideIndex + 1);
+        }, 5000);
     </script>
 </body>
 </html>

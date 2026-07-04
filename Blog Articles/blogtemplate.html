@@ -401,10 +401,14 @@
         
         <!-- Desktop Nav -->
         <nav class="nav-links">
-            <a href="portfolio.html">Portfolio</a>
-            <a href="services.html">Services</a>
-            <a href="blog.html">Blog/FAQ</a>
-            <a href="index.html#about">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../services.html">Services</a>
+            <a href="../blog.html">Blog/FAQ</a>
+            <a href="../index.html#about">About</a>
+            <a href="https://alexander-graham.zite.so" class="client-portal" id="openPortalBtn">
+                Client Portal
+                <span>Sign In</span>
+            </a>
         </nav>
 
         <!-- Hamburger Icon -->
@@ -417,10 +421,11 @@
 
     <!-- Mobile Drawer Overlay -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="portfolio.html" class="mobile-link">Portfolio</a>
-        <a href="services.html" class="mobile-link">Services</a>
-        <a href="blog.html" class="mobile-link">Blog/FAQ</a>
-        <a href="index.html#about" class="mobile-link">About</a>
+        <a href="../portfolio.html" class="mobile-link">Portfolio</a>
+        <a href="../services.html" class="mobile-link">Services</a>
+        <a href="../blog.html" class="mobile-link">Blog/FAQ</a>
+        <a href="../index.html#about" class="mobile-link">About</a>
+        <a href="https://alexander-graham.zite.so" class="mobile-link" id="mobilePortalBtn">Client Portal Sign In</a>
     </div>
 
     <!-- MAIN FULL-BLEED HERO HEADER (Change background crosslines inside CSS rules above) -->
@@ -502,13 +507,65 @@
     <footer class="minimal-footer">
         <div class="footer-logo">Alex Graham</div>
         <nav class="footer-nav">
-            <a href="services.html">Services</a>
-            <a href="blog.html">Blog/FAQ</a>
-            <a href="index.html#about">About</a>
+            <a href="../services.html">Services</a>
+            <a href="../blog.html">Blog/FAQ</a>
+            <a href="../index.html#about">About</a>
+            <a href="https://alexander-graham.zite.so" class="client-portal" id="footerPortalBtn">
+                Client Portal
+                <span>Sign In</span>
+            </a>
         </nav>
     </footer>
 
+    <!-- CLIENT PORTAL INTERACTIVE MODAL -->
+    <div class="portal-modal-overlay" id="portalModal">
+        <div class="portal-modal">
+            <div class="modal-header">
+                <h2 style="font-weight: 500; font-size: 1.5rem;">Client Portal</h2>
+                <button class="close-modal" id="closePortalBtn">&times;</button>
+            </div>
+            <form onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="name@company.com">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-signin">Sign In</button>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // CLIENT PORTAL MODAL INTERACTION
+        const portalModal = document.getElementById('portalModal');
+        const openPortalBtn = document.getElementById('openPortalBtn');
+        const mobilePortalBtn = document.getElementById('mobilePortalBtn');
+        const footerPortalBtn = document.getElementById('footerPortalBtn');
+        const closePortalBtn = document.getElementById('closePortalBtn');
+
+        function openModal(e) {
+            e.preventDefault();
+            window.location.href = 'https://alexander-graham.zite.so';
+        }
+
+        function closeModal() {
+            portalModal.classList.remove('active');
+        }
+
+        openPortalBtn.addEventListener('click', openModal);
+        mobilePortalBtn.addEventListener('click', openModal);
+        footerPortalBtn.addEventListener('click', openModal);
+        closePortalBtn.addEventListener('click', closeModal);
+
+        portalModal.addEventListener('click', (e) => {
+            if (e.target === portalModal) {
+                closeModal();
+            }
+        });
+
         // MOBILE HAMBURGER MENU TRANSITION
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const mobileMenu = document.getElementById('mobileMenu');
