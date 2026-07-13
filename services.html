@@ -197,23 +197,7 @@
         .hero-image-frame::before,
         .hero-image-frame::after {
             content: '';
-            position: absolute;
-            width: 150%;
-            height: 1px;
-            background-color: rgba(0,0,0,0.08);
-            top: 50%;
-            left: 50%;
-            transform-origin: center;
-            z-index: 1;
-            transition: opacity var(--transition-speed);
-        }
-
-        .hero-image-frame::before { transform: translate(-50%, -50%) rotate(12deg); }
-        .hero-image-frame::after { transform: translate(-50%, -50%) rotate(-12deg); }
-
-        .hero-image-frame.image-loaded::before,
-        .hero-image-frame.image-loaded::after {
-            opacity: 0;
+            display: none;
         }
 
         .page-hero-content {

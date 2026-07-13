@@ -178,15 +178,8 @@
         .article-hero::before,
         .article-hero::after {
             content: '';
-            position: absolute;
-            width: 150%;
-            height: 1px;
-            background-color: rgba(0,0,0,0.08);
-            transform-origin: center;
-            z-index: 1;
+            display: none;
         }
-        .article-hero::before { transform: rotate(12deg); }
-        .article-hero::after { transform: rotate(-12deg); }
 
         .article-hero-content {
             text-align: center;

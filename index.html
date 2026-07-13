@@ -86,7 +86,7 @@
             padding: var(--universal-margin);
         }
 
-        /* HERO HEADER BLOCK (Mockup 1 style) */
+        /* HERO HEADER BLOCK */
         header.hero-nav {
             position: fixed;
             top: 0;
@@ -103,7 +103,7 @@
         }
 
         .logo {
-            font-weight: 600; /* Logo weight */
+            font-weight: 600;
             font-size: clamp(1.1rem, 1.8vw, 1.4rem);
             letter-spacing: -0.01em;
             z-index: 1001;
@@ -121,6 +121,7 @@
         .client-portal {
             text-align: right;
             line-height: 1.1;
+            cursor: pointer;
         }
 
         .client-portal span {
@@ -175,6 +176,7 @@
         .mobile-menu a {
             font-size: 1.8rem;
             font-weight: 400;
+            cursor: pointer;
         }
 
         /* UNIVERSAL FULL-BLEED HERO HEADING IMAGE */
@@ -203,23 +205,7 @@
         .hero-image-frame::before,
         .hero-image-frame::after {
             content: '';
-            position: absolute;
-            width: 150%;
-            height: 1px;
-            background-color: rgba(0,0,0,0.08);
-            top: 50%;
-            left: 50%;
-            transform-origin: center;
-            z-index: 1;
-            transition: opacity var(--transition-speed);
-        }
-
-        .hero-image-frame::before { transform: translate(-50%, -50%) rotate(12deg); }
-        .hero-image-frame::after { transform: translate(-50%, -50%) rotate(-12deg); }
-
-        .hero-image-frame.image-loaded::before,
-        .hero-image-frame.image-loaded::after {
-            opacity: 0;
+            display: none;
         }
 
         .page-hero-content {
@@ -254,6 +240,7 @@
             transition: transform var(--transition-speed) ease;
         }
 
+        /* The 'X' crossing lines for empty states */
         .picture-frame::before,
         .picture-frame::after {
             content: '';
@@ -293,11 +280,43 @@
             opacity: 1;
         }
 
+        /* INTRO FEATURE SECTION */
+        .intro-feature-section {
+            background-color: var(--bg-white);
+            padding: calc(var(--universal-margin) * 1.5) var(--universal-margin);
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .intro-feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(30px, 6vw, 100px);
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            margin-bottom: 24px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .intro-text p {
+            color: var(--text-muted);
+            font-size: clamp(1rem, 1.2vw, 1.15rem);
+            line-height: 1.6;
+        }
+
+        .intro-media .picture-frame {
+            aspect-ratio: 4 / 3;
+            width: 100%;
+        }
+
         /* REFINED SLIDESHOW SECTION: White background split structure */
         .slideshow-section {
             background-color: var(--bg-white);
             color: var(--text-dark);
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -473,7 +492,7 @@
             white-space: nowrap;
         }
 
-        /* DESIGN PROCESS SECTION (Mockup 4) */
+        /* DESIGN PROCESS SECTION */
         .process-section {
             background-color: var(--bg-white);
             padding: calc(var(--universal-margin) * 1.5) var(--universal-margin);
@@ -512,43 +531,7 @@
             text-align: justify;
         }
 
-        /* READ MORE / PORTFOLIO ARRAYS (Mockup 5) */
-        .read-more-section {
-            background-color: var(--bg-white);
-            padding: var(--universal-margin);
-            border-top: 1px solid #eeeeee;
-        }
-
-        .read-more-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 300;
-            margin-bottom: 30px;
-        }
-
-        .horizontal-scroller {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 80px;
-        }
-
-        .scroller-card {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .scroller-picture-frame {
-            aspect-ratio: 16 / 9;
-        }
-
-        .scroller-subtitle {
-            font-weight: 500;
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            color: var(--text-dark);
-        }
-
-        /* PERSISTENT FOOTER ARCHITECTURE (Mockup 5) */
+        /* PERSISTENT FOOTER ARCHITECTURE */
         footer.minimal-footer {
             background-color: var(--bg-light);
             display: flex;
@@ -671,9 +654,6 @@
             .process-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .horizontal-scroller {
-                grid-template-columns: repeat(2, 1fr);
-            }
             .slide-layout {
                 gap: 40px;
             }
@@ -698,6 +678,11 @@
                 display: none;
             }
 
+            .intro-feature-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
             .slide-layout.active {
                 display: flex;
                 flex-direction: column;
@@ -714,7 +699,7 @@
                 margin: 20px 0;
             }
 
-            .process-grid, .horizontal-scroller {
+            .process-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -779,15 +764,41 @@
         <a href="https://alexander-graham.zite.so" class="mobile-link" id="mobilePortalBtn">Client Portal Sign In</a>
     </div>
 
-    <!-- UNIVERSAL FULL-BLEED HERO HEADING IMAGE (Excluding Articles rule met) -->
+    <!-- UNIVERSAL FULL-BLEED HERO HEADING IMAGE -->
     <section class="page-hero-bleed">
         <div class="hero-image-frame">
             <!-- INPUT FILE NAME TO REPLACE MAIN HERO BANNER IMAGE HERE -->
-            <img src="/Photos/sean-fahrenbruch-Ir2dJmcJpys-unsplash.jpg" alt="Main Home Banner" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+            <img src="sean-fahrenbruch-Ir2dJmcJpys-unsplash.jpg" alt="Main Home Banner" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
         </div>
         <div class="page-hero-content">
             <h1 class="page-hero-title">Alex Graham</h1>
             <p class="page-hero-subtitle">Graphic Design</p>
+        </div>
+    </section>
+
+    <!-- INTRO FEATURE SECTION -->
+    <section class="intro-feature-section">
+        <div class="intro-feature-grid">
+            <div class="intro-text">
+                <h2 class="h2-medium">Visual systems that make sense for your business.</h2>
+                <p class="body-text">We build cohesive brand ecosystems through thoughtful typography, intuitive layouts, and scalable components. By bridging the gap between aesthetics and function, we create visual identities that deeply resonate with your audience and drive meaningful growth.</p>
+            </div>
+            <div class="intro-media">
+                <div class="picture-frame">
+                    <img src="" alt="" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES CTA SECTION -->
+    <section class="services-cta-section">
+        <div class="services-cta-card">
+            <div class="services-cta-copy">
+                <h2 class="h2-medium">View my services</h2>
+                <p class="body-text">A concise overview of the branding, editorial, and digital systems I create for thoughtful teams and modern businesses.</p>
+            </div>
+            <a href="services.html" class="services-cta-link">Explore services <span>&rarr;</span></a>
         </div>
     </section>
 
@@ -826,7 +837,7 @@
                 <div class="slide-media">
                     <div class="picture-frame slide-picture-frame">
                         <!-- INPUT FILE NAME TO REPLACE SLIDE 2 COVER IMAGE HERE -->
-                        <img src=" alt="Minimal Design Strategy" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
+                        <img src="" alt="Minimal Design Strategy" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
                     </div>
                 </div>
                 <div class="slide-info">
@@ -872,59 +883,6 @@
         </div>
     </section>
 
-    <section class="services-cta-section">
-        <div class="services-cta-card">
-            <div class="services-cta-copy">
-                <h2 class="h2-medium">View my services</h2>
-                <p class="body-text">A concise overview of the branding, editorial, and digital systems I create for thoughtful teams and modern businesses.</p>
-            </div>
-            <a href="services.html" class="services-cta-link">Explore services <span>&rarr;</span></a>
-        </div>
-    </section>
-
-    <!-- DESIGN PROCESS SECTION (Mockup 4) -->
-    <section class="process-section" id="services">
-        <div class="process-header">
-            <h3>Conceptual Project</h3>
-            <h2>Design Process</h2>
-        </div>
-
-        <div class="process-grid">
-            <!-- Column 1 -->
-            <div class="process-card">
-                <div class="picture-frame process-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 1 IMAGE HERE -->
-                    <img src="" alt="Discovery Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
-            </div>
-            <!-- Column 2 -->
-            <div class="process-card">
-                <div class="picture-frame process-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 2 IMAGE HERE -->
-                    <img src="" alt="Prototyping Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
-            </div>
-            <!-- Column 3 -->
-            <div class="process-card">
-                <div class="picture-frame process-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 3 IMAGE HERE -->
-                    <img src="" alt="Design Strategy Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
-            </div>
-            <!-- Column 4 -->
-            <div class="process-card">
-                <div class="picture-frame process-picture-frame">
-                    <!-- INPUT FILE NAME TO REPLACE PROCESS STEP 4 IMAGE HERE -->
-                    <img src="" alt="Delivery Step" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque in augue. Donec aliquam magna elementum convallis arcu.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- PERSISTENT MINIMAL FOOTER -->
     <footer class="minimal-footer" id="about">
         <div class="footer-logo">Alex Graham</div>
@@ -946,7 +904,7 @@
                 <h2 style="font-weight: 500; font-size: 1.5rem;">Client Portal</h2>
                 <button class="close-modal" id="closePortalBtn">&times;</button>
             </div>
-            <form onsubmit="event.preventDefault();">
+            <form id="portalLoginForm">
                 <div class="input-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" required placeholder="name@company.com">
@@ -988,10 +946,12 @@
         const mobilePortalBtn = document.getElementById('mobilePortalBtn');
         const footerPortalBtn = document.getElementById('footerPortalBtn');
         const closePortalBtn = document.getElementById('closePortalBtn');
+        const portalLoginForm = document.getElementById('portalLoginForm');
 
         function openModal(e) {
-            e.preventDefault();
-            window.location.href = 'https://alexander-graham.zite.so';
+            if(e) e.preventDefault();
+            portalModal.classList.add('active');
+            if(mobileMenu.classList.contains('active')) toggleMenu(); // Close mobile menu if open
         }
 
         function closeModal() {
@@ -1003,47 +963,69 @@
         footerPortalBtn.addEventListener('click', openModal);
         closePortalBtn.addEventListener('click', closeModal);
 
+        // Close modal when clicking on the blurred overlay background
         portalModal.addEventListener('click', (e) => {
             if (e.target === portalModal) {
                 closeModal();
             }
         });
 
-        // REFINED SPLIT SLIDESHOW CONTROLLER (White/Black, Frame left, Text right)
-        let currentSlideIndex = 0;
-        const totalSlides = 3;
-        
+        // Handle Form Submission Mock
+        portalLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real environment, you'd handle auth here.
+            alert("Sign-in function would trigger here for: " + document.getElementById('email').value);
+            closeModal();
+        });
+
+
+        // SLIDESHOW LOGIC
         const slides = document.querySelectorAll('.slide-layout');
-        const indicatorDots = document.querySelectorAll('.indicator-dot');
-        const slideCounter = document.getElementById('slideCounter');
+        const dots = document.querySelectorAll('.indicator-dot');
+        const counter = document.getElementById('slideCounter');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let slideInterval;
 
-        function showSlide(index) {
-            if (index >= totalSlides) index = 0;
-            if (index < 0) index = totalSlides - 1;
-            
-            currentSlideIndex = index;
+        function goToSlide(index) {
+            // Remove active class from all
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
 
-            slides.forEach((slide, idx) => {
-                slide.classList.toggle('active', idx === currentSlideIndex);
-            });
+            // Add active class to current index
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
 
-            indicatorDots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentSlideIndex);
-            });
-
-            slideCounter.textContent = `0${currentSlideIndex + 1} / 03`;
+            // Update counter text
+            counter.innerText = `0${index + 1} / 0${totalSlides}`;
         }
 
-        indicatorDots.forEach(dot => {
+        // Add click events to indicators
+        dots.forEach(dot => {
             dot.addEventListener('click', (e) => {
-                const targetIndex = parseInt(e.target.getAttribute('data-index'));
-                showSlide(targetIndex);
+                const index = parseInt(e.target.getAttribute('data-index'));
+                goToSlide(index);
+                resetAutoSlide(); // Pause auto-rotation when user interacts
             });
         });
 
-        setInterval(() => {
-            showSlide(currentSlideIndex + 1);
-        }, 5000);
+        // Optional Auto-play mechanics
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                let nextSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(nextSlide);
+            }, 6000); // Change slide every 6 seconds
+        }
+
+        function resetAutoSlide() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        // Initialize Auto Slide
+        startAutoSlide();
+
     </script>
 </body>
 </html>

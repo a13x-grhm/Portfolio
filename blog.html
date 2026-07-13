@@ -197,23 +197,7 @@
         .hero-image-frame::before,
         .hero-image-frame::after {
             content: '';
-            position: absolute;
-            width: 150%;
-            height: 1px;
-            background-color: rgba(0,0,0,0.08);
-            top: 50%;
-            left: 50%;
-            transform-origin: center;
-            z-index: 1;
-            transition: opacity var(--transition-speed);
-        }
-
-        .hero-image-frame::before { transform: translate(-50%, -50%) rotate(12deg); }
-        .hero-image-frame::after { transform: translate(-50%, -50%) rotate(-12deg); }
-
-        .hero-image-frame.image-loaded::before,
-        .hero-image-frame.image-loaded::after {
-            opacity: 0;
+            display: none;
         }
 
         .page-hero-content {
@@ -305,45 +289,35 @@
             background: transparent;
         }
 
-        /* FEATURED CAROUSEL SECTION (blogmockup2.png alignment) */
-        .featured-carousel-block {
+        .jump-links-container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: var(--universal-margin);
+            padding: calc(var(--universal-margin) * 1.1) var(--universal-margin) 0 var(--universal-margin);
         }
 
-        .featured-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 300;
-            margin-bottom: 24px;
-        }
-
-        .carousel-scroller-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .carousel-card {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            cursor: pointer;
-        }
-
-        .carousel-picture-frame {
-            aspect-ratio: 16 / 9;
-        }
-
-        .carousel-subtitle {
+        .jump-link-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000000;
+            padding: 10px 18px;
+            font-size: 0.95rem;
             font-weight: 500;
-            font-size: clamp(1rem, 1.4vw, 1.25rem);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background-color: var(--bg-white);
             color: var(--text-dark);
-            transition: opacity var(--transition-speed);
         }
 
-        .carousel-card:hover .carousel-subtitle {
-            opacity: 0.6;
+        .jump-link-button:hover {
+            background-color: var(--bg-light);
+            opacity: 1;
+        }
+
+        .faq-section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: calc(var(--universal-margin) * 0.75) var(--universal-margin) 0 var(--universal-margin);
         }
 
         /* BLOG LIST AND SEARCH RESULTS CONTAINER */
@@ -619,6 +593,10 @@
         </div>
     </section>
 
+    <section class="jump-links-container">
+        <a href="#published-articles" class="jump-link-button">Jump to Blogs</a>
+    </section>
+
     <!-- SEARCH ROW BLOCK (blogmockup2.png alignment) -->
     <section class="search-block-container">
         <div class="search-row">
@@ -627,40 +605,34 @@
         </div>
     </section>
 
-    <!-- FEATURED ARTICLE CAROUSEL (blogmockup2.png layout) -->
-    <section class="featured-carousel-block">
-        <h2 class="featured-title">Featured:</h2>
+    <section class="faq-section-container">
+        <h2 class="h2-medium" style="margin-bottom: 24px;" id="faqSectionTitle">Frequently Asked Questions</h2>
         
-        <div class="carousel-scroller-grid">
-            <!-- Featured Slide 1 -->
-            <div class="carousel-card" onclick="window.location.href='article-breadup.html'">
-                <div class="picture-frame carousel-picture-frame">
-                    <!-- INPUT COVER IMAGE FILENAME FOR FEATURED ARTICLE 1 -->
-                    <img src="" alt="Featured Artisanal Branding" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p class="carousel-subtitle">Artisanal Brand Identity Systems</p>
+        <div id="faqList" style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <!-- FAQ 1 -->
+            <div class="faq-item-card search-target" data-type="faq">
+                <h3 class="faq-question">What is your typical project timeline?</h3>
+                <p class="body-text">For core brand identity architectures, our typical process spans 4 to 8 weeks, including visual research, prototyping substrate prints, and compiling digital style libraries.</p>
             </div>
-            <!-- Featured Slide 2 -->
-            <div class="carousel-card" onclick="window.location.href='article-breadup.html'">
-                <div class="picture-frame carousel-picture-frame">
-                    <!-- INPUT COVER IMAGE FILENAME FOR FEATURED ARTICLE 2 -->
-                    <img src="" alt="Featured Interface System Specs" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p class="carousel-subtitle">Minimal Interface Grid Details</p>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item-card search-target" data-type="faq">
+                <h3 class="faq-question">Do you assist with print production?</h3>
+                <p class="body-text">Absolutely. We work directly with raw cardstock suppliers and high-contrast letterpress professionals to supervise production stages, stamp alignments, and material proofs.</p>
             </div>
-            <!-- Featured Slide 3 -->
-            <div class="carousel-card" onclick="window.location.href='article-breadup.html'">
-                <div class="picture-frame carousel-picture-frame">
-                    <!-- INPUT COVER IMAGE FILENAME FOR FEATURED ARTICLE 3 -->
-                    <img src="" alt="Featured Packaging Blueprints" class="frame-img" onload="this.parentNode.classList.add('image-loaded');" onerror="this.style.opacity=0;">
-                </div>
-                <p class="carousel-subtitle">Asymmetric Studio Structures</p>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item-card search-target" data-type="faq">
+                <h3 class="faq-question">Can I update my social media templates on my own?</h3>
+                <p class="body-text">Yes, we deliver fully editable template specs alongside detailed variable design system guidelines so your teams can create new matching visual assets in house.</p>
             </div>
+
         </div>
     </section>
 
-    <!-- BLOG POST LISTINGS & FAQ RESULTS -->
-    <main class="posts-listings-section">
+    <!-- BLOG POST LISTINGS -->
+    <main class="posts-listings-section" id="published-articles">
         
         <div style="margin-bottom: 20px;">
             <h2 class="h2-medium" style="margin-bottom: 24px;" id="postsSectionTitle">Published Articles</h2>
@@ -710,32 +682,6 @@
                         </div>
                     </div>
                     <a href="article-breadup.html" style="font-weight: 600; text-align: right;">Read Post &rarr;</a>
-                </div>
-
-            </div>
-        </div>
-
-        <div>
-            <h2 class="h2-medium" style="margin-bottom: 24px;" id="faqSectionTitle">Frequently Asked Questions</h2>
-            
-            <div id="faqList" style="display: flex; flex-direction: column; gap: 15px;">
-                
-                <!-- FAQ 1 -->
-                <div class="faq-item-card search-target" data-type="faq">
-                    <h3 class="faq-question">What is your typical project timeline?</h3>
-                    <p class="body-text">For core brand identity architectures, our typical process spans 4 to 8 weeks, including visual research, prototyping substrate prints, and compiling digital style libraries.</p>
-                </div>
-
-                <!-- FAQ 2 -->
-                <div class="faq-item-card search-target" data-type="faq">
-                    <h3 class="faq-question">Do you assist with print production?</h3>
-                    <p class="body-text">Absolutely. We work directly with raw cardstock suppliers and high-contrast letterpress professionals to supervise production stages, stamp alignments, and material proofs.</p>
-                </div>
-
-                <!-- FAQ 3 -->
-                <div class="faq-item-card search-target" data-type="faq">
-                    <h3 class="faq-question">Can I update my social media templates on my own?</h3>
-                    <p class="body-text">Yes, we deliver fully editable template specs alongside detailed variable design system guidelines so your teams can create new matching visual assets in house.</p>
                 </div>
 
             </div>
