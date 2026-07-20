@@ -226,14 +226,6 @@
             line-height: 1.7;
         }
 
-        .layout-lead-text::first-letter {
-            font-size: 3.5rem;
-            font-weight: 700;
-            float: left;
-            margin-right: 12px;
-            line-height: 0.85;
-            color: var(--text-dark);
-        }
 
         /* Layout Variation 2: Stark Asymmetric Split (Text Left, Image Right) */
         .layout-asymmetric-split {
@@ -296,6 +288,92 @@
         }
         .picture-frame::before { transform: translate(-50%, -50%) rotate(32deg); }
         .picture-frame::after { transform: translate(-50%, -50%) rotate(-32deg); }
+
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
 
         /* BACK TO BLOG LINK */
         .back-link-wrapper {
@@ -451,18 +529,31 @@
 
         <!-- LAYOUT BLOCK 1: Narrative lead with drop cap -->
         <div class="layout-lead-text">
+            <h2 class="h2-medium">Overview</h2>
             Lead paragraph goes here. Simply copy and paste this complete block when creating a new page. The initial character will style automatically as a dropcap. Keep it impactful, setting the context of your design findings.
         </div>
 
         <!-- LAYOUT BLOCK 2: Stark Asymmetric Split (Text Left, Image Right) -->
         <div class="layout-asymmetric-split">
             <div style="display: flex; flex-direction: column; gap: 20px;">
-                <h2 class="h2-medium">Asymmetrical Structure Analysis</h2>
+                <h2 class="h2-medium">Goals</h2>
                 <p class="body-text">
                     This block is excellent for pairing analytical narrative panels alongside stylized visual wireframes. It keeps the layouts visually dynamic without feeling repetitive to the end reader.
                 </p>
             </div>
-            <div class="picture-frame"></div>
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="Photos/sundaytinv_july17.png" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="Photos/sundaytinv_july17.png" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="Photos/sundaytinv_july17.png" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
         </div>
 
         <!-- LAYOUT BLOCK 3: Pull Quote Block -->
@@ -478,6 +569,28 @@
             <p class="body-text">
                 Right column details. Continues the dual layout narrative flow. Combining distinct typography heights and structural limits preserves the sophisticated system aesthetic.
             </p>
+        </div>
+
+         <div class="layout-asymmetric-split">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <h2 class="h2-medium">Asymmetrical Structure Analysis</h2>
+                <p class="body-text">
+                    This block is excellent for pairing analytical narrative panels alongside stylized visual wireframes. It keeps the layouts visually dynamic without feeling repetitive to the end reader.
+                </p>
+            </div>
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="https://via.placeholder.com/600x400/FF0000/FFFFFF?text=Slide+4" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="https://via.placeholder.com/600x400/00FF00/FFFFFF?text=Slide+5" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="https://via.placeholder.com/600x400/0000FF/FFFFFF?text=Slide+6" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
         </div>
 
         <!-- LAYOUT BLOCK 5: Centered narrow narrative block -->
@@ -510,54 +623,8 @@
         </nav>
     </footer>
 
-    <!-- CLIENT PORTAL INTERACTIVE MODAL -->
-    <div class="portal-modal-overlay" id="portalModal">
-        <div class="portal-modal">
-            <div class="modal-header">
-                <h2 style="font-weight: 500; font-size: 1.5rem;">Client Portal</h2>
-                <button class="close-modal" id="closePortalBtn">&times;</button>
-            </div>
-            <form onsubmit="event.preventDefault();">
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" required placeholder="name@company.com">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-signin">Sign In</button>
-            </form>
-        </div>
-    </div>
 
     <script>
-        // CLIENT PORTAL MODAL INTERACTION
-        const portalModal = document.getElementById('portalModal');
-        const openPortalBtn = document.getElementById('openPortalBtn');
-        const mobilePortalBtn = document.getElementById('mobilePortalBtn');
-        const footerPortalBtn = document.getElementById('footerPortalBtn');
-        const closePortalBtn = document.getElementById('closePortalBtn');
-
-        function openModal(e) {
-            e.preventDefault();
-            window.location.href = 'https://alexander-graham.zite.so';
-        }
-
-        function closeModal() {
-            portalModal.classList.remove('active');
-        }
-
-        openPortalBtn.addEventListener('click', openModal);
-        mobilePortalBtn.addEventListener('click', openModal);
-        footerPortalBtn.addEventListener('click', openModal);
-        closePortalBtn.addEventListener('click', closeModal);
-
-        portalModal.addEventListener('click', (e) => {
-            if (e.target === portalModal) {
-                closeModal();
-            }
-        });
 
         // MOBILE HAMBURGER MENU TRANSITION
         const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -579,6 +646,33 @@
                 }
             });
         });
+
+        // SLIDESHOW FUNCTIONALITY
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+
+        function plusSlides(n) {
+            slideIndex += n;
+            let slides = document.getElementsByClassName("mySlides");
+            if (slideIndex > slides.length) {slideIndex = 1}
+            if (slideIndex < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
     </script>
 </body>
 </html>
