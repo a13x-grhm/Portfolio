@@ -351,28 +351,31 @@
         /* The dots/bullets/indicators */
         .dot {
             cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
+            height: 7px;
+            width: 7px;
+            margin: 0 4px;
             background-color: #bbb;
             border-radius: 50%;
             display: inline-block;
-            transition: background-color 0.6s ease;
+            transition: all 0.3s ease;
+            border: 1.5px solid transparent;
+            box-sizing: content-box;
         }
 
-        .active, .dot:hover {
-            background-color: #717171;
+        .dot.active, .dot:hover {
+            background-color: transparent;
+            border-color: #000000;
         }
 
-        /* Fading animation */
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
+        .dot-container {
+            text-align: center;
+            margin-top: 10px;
+            line-height: 1;
         }
 
-        @keyframes fade {
-            from {opacity: .4}
-            to {opacity: 1}
+        /* Hide arrows */
+        .prev, .next {
+            display: none;
         }
 
         /* BACK TO BLOG LINK */
@@ -541,18 +544,24 @@
                     This block is excellent for pairing analytical narrative panels alongside stylized visual wireframes. It keeps the layouts visually dynamic without feeling repetitive to the end reader.
                 </p>
             </div>
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <img src="Photos/sundaytinv_july17.png" style="width:100%">
+            <div style="display: flex; flex-direction: column;">
+                <div class="slideshow-container">
+                    <div class="mySlides" onclick="plusSlides(1, 0)">
+                        <img src="../Photos/4thofJulyTailgateINV.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <div class="mySlides" onclick="plusSlides(1, 0)">
+                        <img src="../Photos/mdwk invite gfx.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <div class="mySlides" onclick="plusSlides(1, 0)">
+                        <img src="../Photos/MDWKinviteapr20.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <div class="mySlides" onclick="plusSlides(1, 0)">
+                        <img src="../Photos/sundaytinv_july17.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
                 </div>
-                <div class="mySlides fade">
-                    <img src="Photos/sundaytinv_july17.png" style="width:100%">
-                </div>
-                <div class="mySlides fade">
-                    <img src="Photos/sundaytinv_july17.png" style="width:100%">
-                </div>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="dot-container dot-container-0"></div>
             </div>
         </div>
 
@@ -578,18 +587,24 @@
                     This block is excellent for pairing analytical narrative panels alongside stylized visual wireframes. It keeps the layouts visually dynamic without feeling repetitive to the end reader.
                 </p>
             </div>
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <img src="https://via.placeholder.com/600x400/FF0000/FFFFFF?text=Slide+4" style="width:100%">
+            <div style="display: flex; flex-direction: column;">
+                <div class="slideshow-container">
+                    <div class="mySlides" onclick="plusSlides(1, 1)">
+                        <img src="../Photos/4thofJulyTailgateINV.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <div class="mySlides" onclick="plusSlides(1, 1)">
+                        <img src="../Photos/mdwk invite gfx.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <div class="mySlides" onclick="plusSlides(1, 1)">
+                        <img src="../Photos/MDWKinviteapr20.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <div class="mySlides" onclick="plusSlides(1, 1)">
+                        <img src="../Photos/sundaytinv_july17.png" style="width:100%; cursor:pointer;">
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
                 </div>
-                <div class="mySlides fade">
-                    <img src="https://via.placeholder.com/600x400/00FF00/FFFFFF?text=Slide+5" style="width:100%">
-                </div>
-                <div class="mySlides fade">
-                    <img src="https://via.placeholder.com/600x400/0000FF/FFFFFF?text=Slide+6" style="width:100%">
-                </div>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="dot-container dot-container-1"></div>
             </div>
         </div>
 
@@ -648,31 +663,75 @@
         });
 
         // SLIDESHOW FUNCTIONALITY
-        let slideIndex = 0;
-        showSlides();
+        let slideIndexes = [0, 0]; // One index for each slideshow
+        let slideTimeouts = []; // To store timeout IDs for each slideshow
 
-        function showSlides() {
+        // Generate dots for each slideshow first
+        document.querySelectorAll('.slideshow-container').forEach((container, slideshowId) => {
+            let slides = container.getElementsByClassName("mySlides");
+            let dotContainer = document.querySelector(`.dot-container-${slideshowId}`);
+            if (dotContainer) {
+                dotContainer.innerHTML = ''; // Clear any existing dots
+                for (let i = 0; i < slides.length; i++) {
+                    let dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    dot.setAttribute('onclick', `currentSlide(${i + 1}, ${slideshowId})`);
+                    dotContainer.appendChild(dot);
+                }
+            }
+        });
+
+        // Initialize all slideshows after dots are created
+        document.querySelectorAll('.slideshow-container').forEach((container, index) => {
+            showSlides(1, index, 2000);
+        });
+
+        function showSlides(n, slideshowId, delay = 2000) {
             let i;
-            let slides = document.getElementsByClassName("mySlides");
+            let slideshows = document.querySelectorAll('.slideshow-container');
+            let currentSlideshow = slideshows[slideshowId];
+            let slides = currentSlideshow.getElementsByClassName("mySlides");
+            let dots = document.querySelectorAll(`.dot-container-${slideshowId} .dot`);
+
+            if (slides.length === 0) return;
+
+            if (n > slides.length) {slideIndexes[slideshowId] = 1}
+            else if (n < 1) {slideIndexes[slideshowId] = slides.length}
+            else {slideIndexes[slideshowId] = n}
+
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
-            setTimeout(showSlides, 4000); // Change image every 4 seconds
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndexes[slideshowId]-1].style.display = "block";
+            if (dots[slideIndexes[slideshowId]-1]) {
+                dots[slideIndexes[slideshowId]-1].className += " active";
+            }
+
+            // Clear any existing timeout for this slideshow to avoid double triggers
+            if (slideTimeouts[slideshowId]) {
+                clearTimeout(slideTimeouts[slideshowId]);
+            }
+
+            // Automatic slide change after specified delay (2000 normally, 10000 on user interaction)
+            slideTimeouts[slideshowId] = setTimeout(() => {
+                showSlides(slideIndexes[slideshowId] + 1, slideshowId, 2000);
+            }, delay);
         }
 
-        function plusSlides(n) {
-            slideIndex += n;
-            let slides = document.getElementsByClassName("mySlides");
-            if (slideIndex > slides.length) {slideIndex = 1}
-            if (slideIndex < 1) {slideIndex = slides.length}
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex-1].style.display = "block";
+        function plusSlides(n, slideshowId) {
+            // When user clicks next/prev (or a slide itself), pause auto-sliding for 10 seconds
+            showSlides(slideIndexes[slideshowId] + n, slideshowId, 10000);
         }
+
+        function currentSlide(n, slideshowId) {
+            // When user clicks a dot, pause auto-sliding for 10 seconds
+            showSlides(n, slideshowId, 10000);
+        }
+
     </script>
 </body>
 </html>
